@@ -17,6 +17,12 @@ import random
 # in the secret word that have been correctly guessed so far.
 # For example, if the word is "sass" and the only letter that has been
 # guessed so far is "s", then the return value is 3.
+#
+# Side Effects:
+# This function prints a line to the console, consisting of the secret word
+# with spaces between letters. Correctly guessed letters are shown.
+# Still-secret letters are represented with an underscore. ("_")
+#
 def print_word(word, letters):
     # Try to clear the console for a more video game like experience
     # (May not work in every Python environment)
@@ -46,7 +52,7 @@ def print_word(word, letters):
                 # because we already matched. 
                 # We can break out of the 'for guess_letter' loop.
                 break 
-        # after checking all the guessed letters, did we match?
+        # We just finished checking all the guessed letters, did we match?
         if letter_guessed:
             # yes, so increment our match counter for later reporting
             matches += 1 
@@ -58,7 +64,14 @@ def print_word(word, letters):
     # display the word to the user.
     print(line_to_display)
 
-    # return the number of letters in the secret word that have been correctly guessed
+    # Return the number of letters in the secret word 
+    # that have been correctly guessed so far. For example,
+    # if the secret word is "kick" and only "k" has been guessed,
+    # we return 2, because there are two "k"s in "kick". If both
+    # "c" and "k" have been guessed, we return 3.
+    # The calling routine can check this number to see if it is the
+    # same as the length of the secret word, which means that the 
+    # game is won.
     return matches
 
 # Defining main function
