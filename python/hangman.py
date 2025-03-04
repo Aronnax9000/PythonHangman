@@ -122,6 +122,9 @@ def play_hangman():
     while bad_guesses < max_bad_guesses:
         # Add a letter from the console to the list of guesses
         guessed_letters += input() 
+        # We are about to update the value of match_count,
+        # and we need to see if it is different from last time,
+        # so we save the current value of match_count in old_match_count.
         old_match_count = match_count
         # print the correct guesses, save the number of matching letters
         match_count = print_word(secret_word, guessed_letters) 
