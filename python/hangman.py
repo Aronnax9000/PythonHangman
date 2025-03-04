@@ -126,11 +126,14 @@ def play_hangman():
         # print the correct guesses, save the number of matching letters
         match_count = print_word(secret_word, guessed_letters) 
         # Are all the letters correctly guessed?
-        if match_count == len(secret_word): 
-            matched_all = True # Save the fact that we won
-            break # Exit the while loop early, no need to keep going.
-        # If the player guessed correctly, match_count will be bigger.
-        if match_count > old_match_count
+        if match_count == len(secret_word):
+            # Save the fact that we won 
+            matched_all = True
+            # Exit the 'while' loop early, no need to keep going. 
+            break 
+
+        # If the player guessed correctly, match_count will be different.
+        if match_count == old_match_count:
             # Guess was incorrect. Increment the bad guess counter
             bad_guesses += 1 
         
