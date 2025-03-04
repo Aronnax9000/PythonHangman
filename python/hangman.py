@@ -79,7 +79,11 @@ def play_hangman():
     # Our word list. You can extended it with as many words
     # as you like. The random number generator will respect
     # the length of the list using the len() function.
-    word_list = ['kitty', 'rock', 'four', 'star', 'spock']
+    word_list = ['kitty', 
+                 'rock', 
+                 'four', 
+                 'star', 
+                 'spock']
 
     # Pick the secret word from the word list.
     # We use the len() function to set the high limit of the
@@ -110,14 +114,25 @@ def play_hangman():
     # keep track of the number of wrong guesses.
     bad_guesses = 0 
 
+    # print_word() reports number of matched letters.
+    # we keep track of this in a variable called match_count.
+    match_count = 0
+
     # game play loop. 
     while bad_guesses < max_bad_guesses:
-        guessed_letters += input() # Add a letter from the console to the list of guesses
-        match_count = print_word(secret_word, guessed_letters) # print the correct guesses, save the number of matching letters
-        if match_count == len(secret_word): # Are all the letters correctly guessed?
+        # Add a letter from the console to the list of guesses
+        guessed_letters += input() 
+        old_match_count = match_count
+        # print the correct guesses, save the number of matching letters
+        match_count = print_word(secret_word, guessed_letters) 
+        # Are all the letters correctly guessed?
+        if match_count == len(secret_word): 
             matched_all = True # Save the fact that we won
             break # Exit the while loop early, no need to keep going.
-        bad_guesses += 1 # guess was incorrect. Increment the bad guess counter
+        # If the player guessed correctly, match_count will be bigger.
+        if match_count > old_match_count
+            # Guess was incorrect. Increment the bad guess counter
+            bad_guesses += 1 
         
     # finished with play. Did we win?
     if matched_all:
