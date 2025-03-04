@@ -3,7 +3,7 @@
 import random
 
 # Where supported, clear the console between guesses.
-import clear_console
+#import clear_console
 
 # Print the current state of the game: the secret word, with underscores
 # as placeholders for unguessed letters.
@@ -20,7 +20,7 @@ import clear_console
 def print_word(word, letters):
     # Try to clear the console for a more video game like experience
     # (May not work in every Python environment)
-    clear_console.clear_console()
+    #clear_console.clear_console()
 
     # At the end, we are going to report (return) the number of 
     # letters of the secret word that are among the correct guesses
