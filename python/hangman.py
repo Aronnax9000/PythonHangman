@@ -2,8 +2,92 @@
 # number generating object provided by Python.
 import random
 
-# Where supported, clear the console between guesses.
-#import clear_console
+gallows_strings = [ [
+    "      ",
+    "      ",
+    "      ",
+    "      ",
+    "      ",
+    "      ",
+    "      "], [
+    "      ",
+    "      ",
+    "      ",
+    "      ",
+    "      ",
+    "      ",
+    "______"], [
+    "      ",
+    " |    ",
+    " |    ",
+    " |    ",
+    " |    ",
+    " |    ",
+    "______"], [
+    " ---  ",
+    " |    ",
+    " |    ",
+    " |    ",
+    " |    ",
+    " |    ",
+    "______"], [
+    " ---  ",
+    " | |  ",
+    " |    ",
+    " |    ",
+    " |    ",
+    " |    ",
+    "______"], [
+    " ---  ",
+    " | |  ",
+    " | O  ",
+    " |/ \\ ",
+    " | |  ",
+    " |/ \\ ",
+    "______"]
+]
+            
+
+def print_gallows(guess_number):
+    gallows_string = '\n'.join(gallows_strings[guess_number])
+    print(gallows_string)
+
+
+def count_matches(word, letters):
+
+    # At the end, we are going to report (return) the number of 
+    # letters of the secret word that are among the correct guesses
+    # so far.
+    matches = 0 
+
+
+    # For each letter of the secret word
+    for secret_letter in word: 
+        # We don't know if the guess is correct, yet.
+        letter_guessed = False 
+        # for each of the letters guessed
+        for guess_letter in letters: 
+            # if the guessed letter matches the current secret word letter
+            if secret_letter == guess_letter: 
+                # Record the fact that the guess was correct.
+                letter_guessed = True 
+                # No need to check the rest of the guest letters 
+                # because we already matched. 
+                # We can break out of the 'for guess_letter' loop.
+                break 
+        # We just finished checking all the guessed letters, did we match?
+        if letter_guessed:
+            # yes, so increment our match counter for later reporting
+            matches += 1 
+    # Return the number of letters in the secret word 
+    # that have been correctly guessed so far. For example,
+    # if the secret word is "kick" and only "k" has been guessed,
+    # we return 2, because there are two "k"s in "kick". If both
+    # "c" and "k" have been guessed, we return 3.
+    # The calling routine can check this number to see if it is the
+    # same as the length of the secret word, which means that the 
+    # game is won.
+    return matches
 
 # Print the current state of the game: the secret word, with underscores
 # as placeholders for unguessed letters.
@@ -24,9 +108,6 @@ import random
 # Still-secret letters are represented with an underscore. ("_")
 #
 def print_word(word, letters):
-    # Try to clear the console for a more video game like experience
-    # (May not work in every Python environment)
-    #clear_console.clear_console()
 
     # At the end, we are going to report (return) the number of 
     # letters of the secret word that are among the correct guesses
@@ -54,25 +135,12 @@ def print_word(word, letters):
                 break 
         # We just finished checking all the guessed letters, did we match?
         if letter_guessed:
-            # yes, so increment our match counter for later reporting
-            matches += 1 
             # save the guessed letter for later display
             line_to_display += secret_letter + " " 
         else:
             # save an underscore "_" placeholder for later display
             line_to_display += "_ " 
-    # display the word to the user.
     print(line_to_display)
-
-    # Return the number of letters in the secret word 
-    # that have been correctly guessed so far. For example,
-    # if the secret word is "kick" and only "k" has been guessed,
-    # we return 2, because there are two "k"s in "kick". If both
-    # "c" and "k" have been guessed, we return 3.
-    # The calling routine can check this number to see if it is the
-    # same as the length of the secret word, which means that the 
-    # game is won.
-    return matches
 
 # Defining main function
 def play_hangman():
@@ -98,9 +166,6 @@ def play_hangman():
     # to the string, using the += operator.
     guessed_letters = ""
     
-    # print the current correct guesses, with underscores for unknowns
-    print_word(secret_word, guessed_letters) 
-
     # Keep track of whether the player has correctly guessed all letters
     # We declare it here in case the while loop never runs
     # (in case something goes wrong and max_bad_guesses is 0)
@@ -114,20 +179,32 @@ def play_hangman():
     # keep track of the number of wrong guesses.
     bad_guesses = 0 
 
+
+    # print the current correct guesses, with underscores for unknowns
+    # Since nothing has been guessed yet, we will see only 
+    # underscore placeholders.
+    #print_word(secret_word, guessed_letters, bad_guesses) 
+
     # print_word() reports number of matched letters.
     # we keep track of this in a variable called match_count.
     match_count = 0
 
     # game play loop. 
     while bad_guesses < max_bad_guesses:
+        print_gallows(bad_guesses)
+        print_word(secret_word, guessed_letters)
+        print('Enter your guess: ', end="")
+        
         # Add a letter from the console to the list of guesses
         guessed_letters += input() 
         # We are about to update the value of match_count,
-        # and we need to see if it is different from last time,
+        # and we need to see if it is different from blast time,
         # so we save the current value of match_count in old_match_count.
         old_match_count = match_count
         # print the correct guesses, save the number of matching letters
-        match_count = print_word(secret_word, guessed_letters) 
+        match_count = count_matches(secret_word, guessed_letters)
+        
+
         # Are all the letters correctly guessed?
         if match_count == len(secret_word):
             # Save the fact that we won 
@@ -140,10 +217,13 @@ def play_hangman():
             # Guess was incorrect. Increment the bad guess counter
             bad_guesses += 1 
         
+        
     # finished with play. Did we win?
     if matched_all:
+        print_word(secret_word, guessed_letters)
         print('You won')
     else:
+        print_gallows(bad_guesses)
         print('You lost')
     
     
