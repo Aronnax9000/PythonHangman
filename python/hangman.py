@@ -52,7 +52,17 @@ def print_gallows(guess_number):
     gallows_string = '\n'.join(gallows_strings[guess_number])
     print(gallows_string)
 
-
+# Count the number of letters in the secret word that have been 
+# correctly guessed.
+# Parameters:
+# word is the word we're trying to guess, 
+# letters is a string with all the guessed letters.
+#
+# Return Value: 
+# The function returns an integer, the number of letter (positions) 
+# in the secret word that have been correctly guessed so far.
+# For example, if the word is "sass" and the only letter that has been
+# guessed so far is "s", then the return value is 3.
 def count_matches(word, letters):
 
     # At the end, we are going to report (return) the number of 
