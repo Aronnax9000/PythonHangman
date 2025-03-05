@@ -2,43 +2,44 @@
 # number generating object provided by Python.
 import random
 
+# The entire animation of the gallows, as a list of list of strings.
 gallows_strings = [ [
-    "      ",
+    "      ", # Bad guesses: 0
     "      ",
     "      ",
     "      ",
     "      ",
     "      ",
     "      "], [
-    "      ",
+    "      ", # Bad guesses: 1
     "      ",
     "      ",
     "      ",
     "      ",
     "      ",
     "______"], [
-    "      ",
+    "      ", # Bad guesses: 2
     " |    ",
     " |    ",
     " |    ",
     " |    ",
     " |    ",
     "______"], [
-    " ---  ",
+    " ---  ",# Bad guesses: 3
     " |    ",
     " |    ",
     " |    ",
     " |    ",
     " |    ",
     "______"], [
-    " ---  ",
+    " ---  ",# Bad guesses: 4
     " | |  ",
     " |    ",
     " |    ",
     " |    ",
     " |    ",
     "______"], [
-    " ---  ",
+    " ---  ",# Bad guesses: 5
     " | |  ",
     " | O  ",
     " |/ \\ ",
@@ -203,10 +204,9 @@ def play_hangman():
     while bad_guesses < max_bad_guesses:
         print_gallows(bad_guesses)
         print_word(secret_word, guessed_letters)
-        print('Enter your guess: ', end="")
         
         # Add a letter from the console to the list of guesses
-        guessed_letters += input() 
+        guessed_letters += input('Enter your guess: ') 
         # We are about to update the value of match_count,
         # and we need to see if it is different from blast time,
         # so we save the current value of match_count in old_match_count.
