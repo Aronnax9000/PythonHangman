@@ -9,3 +9,4 @@ def clear_console():
         os.system('clear')
     else:
         print("Operating system not supported to clear console.")
+

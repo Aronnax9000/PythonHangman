@@ -4,48 +4,48 @@ import random
 
 # The entire animation of the gallows, as a list of list of strings.
 gallows_strings = [ [
-    "      ", # Bad guesses: 0
-    "      ",
-    "      ",
-    "      ",
-    "      ",
-    "      ",
-    "      "], [
-    "      ", # Bad guesses: 1
-    "      ",
-    "      ",
-    "      ",
-    "      ",
-    "      ",
-    "______"], [
-    "      ", # Bad guesses: 2
-    " |    ",
-    " |    ",
-    " |    ",
-    " |    ",
-    " |    ",
-    "______"], [
-    " ---  ",# Bad guesses: 3
-    " |    ",
-    " |    ",
-    " |    ",
-    " |    ",
-    " |    ",
-    "______"], [
-    " ---  ",# Bad guesses: 4
-    " | |  ",
-    " |    ",
-    " |    ",
-    " |    ",
-    " |    ",
-    "______"], [
-    " ---  ",# Bad guesses: 5
-    " | |  ",
-    " | O  ",
-    " |/ \\ ",
-    " | |  ",
-    " |/ \\ ",
-    "______"]
+    "       ", # Bad guesses: 0
+    "       ",
+    "       ",
+    "       ",
+    "       ",
+    "       ",
+    "       "], [
+    "       ", # Bad guesses: 1
+    "       ",
+    "       ",
+    "       ",
+    "       ",
+    "       ",
+    " ______"], [
+    "       ", # Bad guesses: 2
+    " |     ",
+    " |     ",
+    " |     ",
+    " |     ",
+    " |     ",
+    " ______"], [
+    " ----  ",# Bad guesses: 3
+    " |     ",
+    " |     ",
+    " |     ",
+    " |     ",
+    " |     ",
+    " ______"], [
+    " ----  ",# Bad guesses: 4
+    " |  |  ",
+    " |     ",
+    " |     ",
+    " |     ",
+    " |     ",
+    " ______"], [
+    " ----  ",# Bad guesses: 5
+    " |  |  ",
+    " |  O  ",
+    " | / \\ ",
+    " |  |  ",
+    " | / \\ ",
+    " ______"]
 ]
             
 
@@ -236,7 +236,7 @@ def play_hangman():
     if matched_all:
         print_word(secret_word, guessed_letters)
         print('You won')
-    else: # We lost.
+    else: # We lost
         print_gallows(bad_guesses)
         print('You lost')
     
