@@ -190,36 +190,40 @@ def play_hangman():
     # keep track of the number of wrong guesses.
     bad_guesses = 0 
 
-
-    # print the current correct guesses, with underscores for unknowns
-    # Since nothing has been guessed yet, we will see only 
-    # underscore placeholders.
-    #print_word(secret_word, guessed_letters, bad_guesses) 
-
-    # print_word() reports number of matched letters.
+    # count_matches() reports number of matched letters.
     # we keep track of this in a variable called match_count.
+    # At the beginning of the game, no matches have been made
+    # so match_count should start at 0.
     match_count = 0
 
     # game play loop. 
     while bad_guesses < max_bad_guesses:
+
+        # Display current state of animation
         print_gallows(bad_guesses)
+
+        # Display the secret word with _ underscore placeholders for 
+        # unguessed letters.
         print_word(secret_word, guessed_letters)
         
         # Add a letter from the console to the list of guesses
+        # SECURITY RISK: The user can input more than one letter!
+        # How could we detect this? What should happen if we do?
         guessed_letters += input('Enter your guess: ') 
+
         # We are about to update the value of match_count,
         # and we need to see if it is different from blast time,
         # so we save the current value of match_count in old_match_count.
         old_match_count = match_count
+
         # print the correct guesses, save the number of matching letters
         match_count = count_matches(secret_word, guessed_letters)
         
-
         # Are all the letters correctly guessed?
         if match_count == len(secret_word):
             # Save the fact that we won 
             matched_all = True
-            # Exit the 'while' loop early, no need to keep going. 
+            # Exit the 'game play' loop early, no need to keep going. 
             break 
 
         # If the player guessed correctly, match_count will be different.
@@ -232,14 +236,18 @@ def play_hangman():
     if matched_all:
         print_word(secret_word, guessed_letters)
         print('You won')
-    else:
+    else: # We lost.
         print_gallows(bad_guesses)
         print('You lost')
     
-    
-# Check the special Python-provided variable __name__
-# to see if this module was called directly 
+
+# This code calls the play_hangman function if this module is loaded directly
+# by the Python interpreter.
+#
+# It checks the special Python-provided variable __name__
+# to see if this module was called directly by the Python interpreter,
 # (not imported from another module). 
-# If it is we call the play_hangman() function to play the game.
+#
+# If it is, we call the play_hangman() function to play the game in the console.
 if __name__=="__main__":
     play_hangman()
