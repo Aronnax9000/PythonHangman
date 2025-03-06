@@ -50,8 +50,7 @@ gallows_strings = [ [
             
 
 def print_gallows(guess_number):
-    gallows_string = '\n'.join(gallows_strings[guess_number])
-    print(gallows_string)
+    print('\n'.join(gallows_strings[guess_number]))
 
 # Count the number of letters in the secret word that have been 
 # correctly guessed.
